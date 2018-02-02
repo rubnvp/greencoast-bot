@@ -20,8 +20,7 @@ axios
     .then(response => response.data.data[0]) // get lastPost
     .then(lastPost => axios
     .post('https://slack.com/api/chat.postMessage', {
-        token: SLACK_TOKEN,
-        channel: '#greencoast', // to test with my user: U2XE9BDRA
+        channel: '#greencoast', // to test DM to Ruben use id: U2XE9BDRA
         text: ':robot_face: ' + lastPost.message,
     }, {
         headers: {
