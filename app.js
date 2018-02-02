@@ -22,7 +22,7 @@ axios
     .get(`https://slack.com/api/chat.postMessage`, {
         params: {
             token: SLACK_TOKEN,
-            channel: 'U2XE9BDRA',//"#greencoast", U2XE9BDRA: Ruben
+            channel: '#greencoast', // to test with my user: U2XE9BDRA
             text: ':robot_face: ' + lastPost.message,
         }
     }))
