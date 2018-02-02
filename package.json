@@ -1,0 +1,23 @@
+{
+  "name": "greencoast-bot",
+  "version": "1.0.0",
+  "description": "Get Costa Verde menu from facebook and publish on slack channel",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubnvp/greencoast-bot.git"
+  },
+  "author": "Ruben Valseca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rubnvp/greencoast-bot/issues"
+  },
+  "homepage": "https://github.com/rubnvp/greencoast-bot#readme"
+}
