@@ -19,11 +19,13 @@ axios
     }))
     .then(response => response.data.data[0]) // get lastPost
     .then(lastPost => axios
-    .get(`https://slack.com/api/chat.postMessage`, {
-        params: {
-            token: SLACK_TOKEN,
-            channel: '#greencoast', // to test with my user: U2XE9BDRA
-            text: ':robot_face: ' + lastPost.message,
+    .post('https://slack.com/api/chat.postMessage', {
+        token: SLACK_TOKEN,
+        channel: '#greencoast', // to test with my user: U2XE9BDRA
+        text: ':robot_face: ' + lastPost.message,
+    }, {
+        headers: {
+            'Authorization': 'Bearer ' + SLACK_TOKEN,
         }
     }))
     .catch(error => {
