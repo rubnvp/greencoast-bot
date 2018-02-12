@@ -18,15 +18,25 @@ axios
         }
     }))
     .then(response => response.data.data[0]) // get lastPost
-    .then(lastPost => axios
-    .post('https://slack.com/api/chat.postMessage', {
-        channel: '#greencoast', // to test DM to Ruben use id: U2XE9BDRA
-        text: ':robot_face: ' + lastPost.message,
-    }, {
-        headers: {
-            'Authorization': 'Bearer ' + SLACK_TOKEN,
+    .then(lastPost => {
+        const createdDate = lastPost.created_time.split('T')[0];
+        const currentDate = (new Date()).toISOString().split('T')[0];
+        if (createdDate !== currentDate) return false;
+        return axios
+            .post('https://slack.com/api/chat.postMessage', {
+                    channel: '#greencoast', // to test DM to Ruben use id: U2XE9BDRA
+                    text: ':robot_face: ' + lastPost.message,
+                }, {headers: {'Authorization': 'Bearer ' + SLACK_TOKEN}}
+            );
+    })
+    .then(response => {
+        if (response) {
+            console.log('Sent menu');
         }
-    }))
+        else {
+            console.log('The menu for today is not published');
+        }
+    })
     .catch(error => {
         console.log(error);
     });
