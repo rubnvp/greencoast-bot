@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { FB_ID, FB_SECRET, SLACK_TOKEN } = require('./secrets');
 
-axios
+const fetchAndSendMenu = attemptsCount => axios
     .get('https://graph.facebook.com/v2.12/oauth/access_token', {
         params: {
             client_id: FB_ID,
@@ -33,10 +33,17 @@ axios
         if (response) {
             console.log('Sent menu');
         }
-        else {
-            console.log('The menu for today is not published');
+        else if (attemptsCount < 12) { // try a maximum of 12 times
+            console.log("Menu is not yet published, trying again in 5 minutes...");
+            setTimeout(fetchAndSendMenu, 5 * 60 * 1000, ++attemptsCount); // every 5 minutes
         }
+        else {
+            console.log("Maximum attempts reached, today's menu is not available");
+        }
+        
     })
     .catch(error => {
         console.log(error);
     });
+
+fetchAndSendMenu(0);
